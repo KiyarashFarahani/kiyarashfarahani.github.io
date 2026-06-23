@@ -20,23 +20,22 @@ interface Repo {
 }
 
 const REPOS_TO_SHOW = [
-  "OmegaRay-legacy",
-  "AP-Flutter-Project",
   "WeatherApp",
-  "MasterMind",
+  "AP-Flutter-Project",
   "sudoku",
-  "othello",
-  "Notes50",
-  "WhatToDo",
-  "MusicPlayer",
-  "ReentrancyBug",
-  "writeups",
-  "SkyroomThemes",
-  "TipCalculator",
+  "MasterMind",
+  "OmegaRay-legacy",
+  "Notes50"
 ];
+
+const TITLE_OVERRIDES: Record<string, string> = {
+  "OmegaRay-legacy": "OmegaRay",
+  "AP-Flutter-Project": "Mono Music Player"
+};
 
 export function ProjectsPage() {
   const [repos, setRepos] = useState<Repo[]>([]);
+  const [socialPreviews, setSocialPreviews] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,6 +46,14 @@ export function ProjectsPage() {
         filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
         setRepos(filtered);
         setLoading(false);
+
+        const repoNames = filtered.map((r) => r.name).join(",");
+        fetch(`/api/social-preview?repos=${repoNames}`)
+          .then((res) => res.json())
+          .then((previews: Record<string, string>) => {
+            setSocialPreviews(previews);
+          })
+          .catch(() => {});
       })
       .catch(() => setLoading(false));
   }, []);
@@ -90,7 +97,7 @@ export function ProjectsPage() {
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
-                  src={`https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
+                  src={socialPreviews[repo.name] || `https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
                   alt={repo.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
@@ -111,7 +118,7 @@ export function ProjectsPage() {
                   className="text-xl mb-2"
                   style={{ fontFamily: "'Instrument Serif', serif" }}
                 >
-                  {repo.name}
+                  {TITLE_OVERRIDES[repo.name] || repo.name}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
                   {repo.description || "No description provided."}
