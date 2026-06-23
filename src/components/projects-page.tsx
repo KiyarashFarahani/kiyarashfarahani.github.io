@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Star, GitBranch } from "lucide-react";
+import socialPreviewsRaw from "@/data/social-previews.json";
+
+const socialPreviews: Record<string, string> = socialPreviewsRaw;
 
 interface Repo {
   name: string;
@@ -88,7 +91,7 @@ export function ProjectsPage() {
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
-                  src={`https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
+                  src={socialPreviews[repo.name] || `https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
                   alt={repo.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
