@@ -16,7 +16,7 @@ export function HeroSection() {
       </h1>
 
       <p className="text-muted-foreground text-lg sm:text-xl md:text-2xl max-w-3xl mt-10 leading-relaxed animate-fade-rise-delay">
-        Mobile Application & Website Developer
+        Website & Mobile Application Developer
       </p>
 
       <button

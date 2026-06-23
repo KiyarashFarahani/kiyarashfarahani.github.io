@@ -8,7 +8,7 @@ import { ProjectsPage } from "@/components/projects-page";
 import { AboutPage } from "@/components/about-page";
 import { ReachPage } from "@/components/reach-page";
 import { PageProvider, usePage } from "@/lib/page-context";
-import Beams from "@/components/Beams";
+import PixelBlast from "@/components/PixelBlast";
 
 function PageContent() {
   const { page } = usePage();
@@ -32,6 +32,10 @@ function PageContent() {
 }
 
 function HomePage() {
+  return <HeroSection />;
+}
+
+export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -40,31 +44,29 @@ function HomePage() {
   }, []);
 
   return (
-    <>
-      <div
-        className="absolute inset-0 z-0 transition-opacity duration-1500"
-        style={{ opacity: mounted ? 1 : 0, transitionDuration: "1.5s" }}
-      >
-        <Beams
-          beamWidth={2}
-          beamHeight={15}
-          beamNumber={12}
-          lightColor="#ffffff"
-          speed={2}
-          noiseIntensity={1.75}
-          scale={0.2}
-          rotation={0}
-        />
-      </div>
-      <HeroSection />
-    </>
-  );
-}
-
-export default function Home() {
-  return (
     <PageProvider>
       <div className="relative min-h-screen overflow-hidden">
+        <div
+          className="absolute inset-0 z-0 transition-opacity duration-1500"
+          style={{ opacity: mounted ? 1 : 0, transitionDuration: "1.5s" }}
+        >
+          <div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+            <PixelBlast
+              variant="square"
+              pixelSize={3}
+              color="#9797cf"
+              patternScale={3}
+              patternDensity={1}
+              enableRipples
+              rippleSpeed={0.3}
+              rippleThickness={0.1}
+              rippleIntensityScale={1}
+              speed={0.5}
+              transparent
+              edgeFade={0.5}
+            />
+          </div>
+        </div>
         <Navigation />
         <PageContent />
       </div>
