@@ -35,7 +35,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
 
 export function ProjectsPage() {
   const [repos, setRepos] = useState<Repo[]>([]);
-  const [socialPreviews, setSocialPreviews] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,14 +45,6 @@ export function ProjectsPage() {
         filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
         setRepos(filtered);
         setLoading(false);
-
-        const repoNames = filtered.map((r) => r.name).join(",");
-        fetch(`/api/social-preview?repos=${repoNames}`)
-          .then((res) => res.json())
-          .then((previews: Record<string, string>) => {
-            setSocialPreviews(previews);
-          })
-          .catch(() => {});
       })
       .catch(() => setLoading(false));
   }, []);
@@ -97,7 +88,7 @@ export function ProjectsPage() {
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
-                  src={socialPreviews[repo.name] || `https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
+                  src={`https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
                   alt={repo.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
