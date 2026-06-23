@@ -1,4 +1,10 @@
+"use client";
+
+import { usePage } from "@/lib/page-context";
+
 export function HeroSection() {
+  const { navigate } = usePage();
+
   return (
     <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 min-h-screen">
       <h1
@@ -13,7 +19,10 @@ export function HeroSection() {
         Mobile Application & Website Developer
       </p>
 
-      <button className="liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] transition-transform cursor-pointer animate-fade-rise-delay-2">
+      <button
+        onClick={() => navigate("projects")}
+        className="liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] transition-transform cursor-pointer animate-fade-rise-delay-2"
+      >
         View Projects
       </button>
     </section>
