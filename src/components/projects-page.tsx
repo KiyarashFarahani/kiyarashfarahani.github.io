@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { ExternalLink, Star, GitBranch } from "lucide-react";
 import socialPreviewsRaw from "@/data/social-previews.json";
 
@@ -35,14 +36,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "AP-Flutter-Project": "Mono Music Player"
 };
 
-const STAGGER_CLASSES = [
-  "animate-fade-rise",
-  "animate-fade-rise-1",
-  "animate-fade-rise-2",
-  "animate-fade-rise-3",
-  "animate-fade-rise-4",
-];
-
 export function ProjectsPage() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +54,11 @@ export function ProjectsPage() {
 
   return (
     <section className="relative z-10 min-h-screen px-6 pt-32 pb-20 max-w-7xl mx-auto">
-      <div className="animate-fade-rise">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1
           className="text-5xl sm:text-7xl md:text-8xl mb-4"
           style={{ fontFamily: "'Instrument Serif', serif" }}
@@ -71,7 +68,7 @@ export function ProjectsPage() {
         <p className="text-muted-foreground text-lg max-w-2xl mb-14">
           A selection of projects I&apos;ve built across mobile, web, and systems programming.
         </p>
-      </div>
+      </motion.div>
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -82,12 +79,15 @@ export function ProjectsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {repos.map((repo, i) => (
-            <a
+            <motion.a
               key={repo.name}
               href={repo.homepage || repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${STAGGER_CLASSES[Math.min(i, STAGGER_CLASSES.length - 1)]} group liquid-glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex flex-col`}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="group liquid-glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
@@ -151,7 +151,7 @@ export function ProjectsPage() {
                   </div>
                 )}
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
       )}

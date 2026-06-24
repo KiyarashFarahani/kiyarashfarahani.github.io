@@ -1,19 +1,30 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 export function AboutPage() {
   return (
     <section className="relative z-10 min-h-screen px-6 pt-32 pb-20 max-w-5xl mx-auto">
-      <div className="animate-fade-rise">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1
           className="text-5xl sm:text-7xl md:text-8xl mb-14"
           style={{ fontFamily: "'Instrument Serif', serif" }}
         >
           About Me
         </h1>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        <div className="animate-fade-rise-1 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="space-y-6"
+        >
           <p className="text-lg leading-relaxed text-muted-foreground">
             I&apos;m a developer from Iran with a passion for building clean,
             performant applications across platforms. From native Android apps
@@ -26,9 +37,14 @@ export function AboutPage() {
             and smart contract development (Solidity). I&apos;m driven by
             curiosity and a desire to ship things that people actually use.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="animate-fade-rise-2 space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="space-y-8"
+        >
           <div>
             <h2
               className="text-2xl mb-4"
@@ -84,7 +100,7 @@ export function AboutPage() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
