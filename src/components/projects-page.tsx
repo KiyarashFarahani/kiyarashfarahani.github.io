@@ -41,7 +41,7 @@ export function ProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/KiyarashFarahani/repos?per_page=100&sort=updated")
+    fetch("https://api.github.com/users/KiyarashFarahani/repos?per_page=100&sort=updated", { cache: "force-cache" })
       .then((res) => res.json())
       .then((data: Repo[]) => {
         const filtered = data.filter((r) => REPOS_TO_SHOW.includes(r.name));

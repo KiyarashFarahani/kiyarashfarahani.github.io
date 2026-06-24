@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Navigation } from "@/components/navigation";
 import { HeroSection } from "@/components/hero-section";
-import { ProjectsPage } from "@/components/projects-page";
-import { AboutPage } from "@/components/about-page";
-import { ReachPage } from "@/components/reach-page";
 import { PageProvider, usePage } from "@/lib/page-context";
-import PixelBlast from "@/components/PixelBlast";
+
+const ProjectsPage = lazy(() => import("@/components/projects-page").then(m => ({ default: m.ProjectsPage })));
+const AboutPage = lazy(() => import("@/components/about-page").then(m => ({ default: m.AboutPage })));
+const ReachPage = lazy(() => import("@/components/reach-page").then(m => ({ default: m.ReachPage })));
+const PixelBlast = lazy(() => import("@/components/PixelBlast"));
 
 function PageContent() {
   const { page } = usePage();
@@ -22,25 +23,23 @@ function PageContent() {
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
       >
-        {page === "home" && <HomePage />}
-        {page === "projects" && <ProjectsPage />}
-        {page === "about" && <AboutPage />}
-        {page === "reach" && <ReachPage />}
+        <Suspense fallback={null}>
+          {page === "home" && <HeroSection />}
+          {page === "projects" && <ProjectsPage />}
+          {page === "about" && <AboutPage />}
+          {page === "reach" && <ReachPage />}
+        </Suspense>
       </motion.div>
     </AnimatePresence>
   );
-}
-
-function HomePage() {
-  return <HeroSection />;
 }
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(t);
+    const t = requestIdleCallback(() => setMounted(true), { timeout: 200 });
+    return () => cancelIdleCallback(t);
   }, []);
 
   return (
@@ -51,20 +50,22 @@ export default function Home() {
           style={{ opacity: mounted ? 1 : 0, transitionDuration: "1.5s" }}
         >
           <div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
-            <PixelBlast
-              variant="square"
-              pixelSize={3}
-              color="#9797cf"
-              patternScale={3}
-              patternDensity={1}
-              enableRipples
-              rippleSpeed={0.3}
-              rippleThickness={0.1}
-              rippleIntensityScale={1}
-              speed={0.5}
-              transparent
-              edgeFade={0.5}
-            />
+            <Suspense fallback={null}>
+              <PixelBlast
+                variant="square"
+                pixelSize={3}
+                color="#9797cf"
+                patternScale={3}
+                patternDensity={1}
+                enableRipples
+                rippleSpeed={0.3}
+                rippleThickness={0.1}
+                rippleIntensityScale={1}
+                speed={0.5}
+                transparent
+                edgeFade={0.5}
+              />
+            </Suspense>
           </div>
         </div>
         <Navigation />
