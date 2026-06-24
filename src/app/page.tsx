@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, Suspense, lazy } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Navigation } from "@/components/navigation";
 import { HeroSection } from "@/components/hero-section";
 import { PageProvider, usePage } from "@/lib/page-context";
@@ -15,22 +14,14 @@ function PageContent() {
   const { page } = usePage();
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={page}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
-      >
-        <Suspense fallback={null}>
-          {page === "home" && <HeroSection />}
-          {page === "projects" && <ProjectsPage />}
-          {page === "about" && <AboutPage />}
-          {page === "reach" && <ReachPage />}
-        </Suspense>
-      </motion.div>
-    </AnimatePresence>
+    <div key={page} className="page-enter">
+      <Suspense fallback={null}>
+        {page === "home" && <HeroSection />}
+        {page === "projects" && <ProjectsPage />}
+        {page === "about" && <AboutPage />}
+        {page === "reach" && <ReachPage />}
+      </Suspense>
+    </div>
   );
 }
 

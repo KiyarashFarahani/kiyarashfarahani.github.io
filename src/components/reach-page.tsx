@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Mail, ExternalLink } from "lucide-react";
 
 function GithubIcon({ size = 24 }: { size?: number }) {
@@ -14,11 +13,7 @@ function GithubIcon({ size = 24 }: { size?: number }) {
 export function ReachPage() {
   return (
     <section className="relative z-10 min-h-screen px-6 pt-32 pb-20 max-w-4xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className="animate-fade-rise">
         <h1
           className="text-5xl sm:text-7xl md:text-8xl mb-4"
           style={{ fontFamily: "'Instrument Serif', serif" }}
@@ -29,17 +24,14 @@ export function ReachPage() {
           Got a project in mind or just want to say hello? Feel free to reach
           out.
         </p>
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <motion.a
+        <a
           href="https://github.com/KiyarashFarahani"
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="animate-fade-rise-1 group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
           <div className="liquid-glass rounded-full p-4">
             <GithubIcon size={24} />
@@ -59,14 +51,11 @@ export function ReachPage() {
             size={16}
             className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
           />
-        </motion.a>
+        </a>
 
-        <motion.a
+        <a
           href="mailto:kiyarash.farahani@gmail.com"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="animate-fade-rise-2 group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
           <div className="liquid-glass rounded-full p-4">
             <Mail size={24} />
@@ -86,16 +75,13 @@ export function ReachPage() {
             size={16}
             className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
           />
-        </motion.a>
+        </a>
 
-        <motion.a
+        <a
           href="https://kiana-farahani.vercel.app"
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="animate-fade-rise-3 group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
           <div className="liquid-glass rounded-full p-4">
             <ExternalLink size={24} />
@@ -115,14 +101,9 @@ export function ReachPage() {
             size={16}
             className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
           />
-        </motion.a>
+        </a>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="liquid-glass rounded-2xl p-8 flex items-center gap-5"
-        >
+        <div className="animate-fade-rise-4 liquid-glass rounded-2xl p-8 flex items-center gap-5">
           <div className="liquid-glass rounded-full p-4">
             <svg
               width="24"
@@ -148,7 +129,7 @@ export function ReachPage() {
               Open to collaborations and new opportunities
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
