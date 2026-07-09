@@ -25,18 +25,19 @@ export function AboutPage() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="space-y-6"
         >
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            I&apos;m a developer from Iran with a passion for building clean,
-            performant applications across platforms. From native Android apps
-            to cross-platform Flutter projects and modern web experiences, I
-            enjoy working across the full stack.
-          </p>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            My work spans mobile development (Kotlin, Flutter), systems
-            programming (C++), web technologies (TypeScript, React, Next.js),
-            and smart contract development (Solidity). I&apos;m driven by
-            curiosity and a desire to ship things that people actually use.
-          </p>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              I&apos;m a developer from Iran with a passion for building clean,
+              performant applications across platforms. From native Android apps
+              to cross-platform Flutter projects and modern web experiences, I
+              enjoy working across the full stack.
+            </p>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              My work spans mobile development (Kotlin, Flutter), systems
+              programming (C++), web technologies (TypeScript, React, Next.js),
+              and smart contract development (Solidity). I&apos;m driven by
+              curiosity and a desire to ship things that people actually use.
+            </p>
+          </div>
         </motion.div>
 
         <motion.div

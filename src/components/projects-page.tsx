@@ -87,18 +87,19 @@ export function ProjectsPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group frosted-glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex flex-col"
+              className="group frosted-glass rounded-2xl overflow-hidden flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
                   src={socialPreviews[repo.name] || `https://opengraph.githubassets.com/1/KiyarashFarahani/${repo.name}`}
                   alt={repo.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
                   }}
                 />
+                <div className="shimmer-overlay" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 {repo.homepage && (
                   <div className="absolute top-3 right-3 frosted-glass rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
