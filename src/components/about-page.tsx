@@ -69,7 +69,7 @@ export function AboutPage() {
               ].map((tech) => (
                 <span
                   key={tech}
-                  className="liquid-glass rounded-full px-4 py-2 text-sm text-muted-foreground"
+                  className="frosted-glass rounded-full px-4 py-2 text-sm text-muted-foreground"
                 >
                   {tech}
                 </span>
@@ -93,7 +93,7 @@ export function AboutPage() {
               ].map((area) => (
                 <div
                   key={area}
-                  className="liquid-glass rounded-xl px-5 py-3 text-sm text-muted-foreground"
+                  className="frosted-glass rounded-xl px-5 py-3 text-sm text-muted-foreground"
                 >
                   {area}
                 </div>

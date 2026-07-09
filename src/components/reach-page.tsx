@@ -39,9 +39,9 @@ export function ReachPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
-          <div className="liquid-glass rounded-full p-4">
+          <div className="frosted-glass rounded-full p-4">
             <GithubIcon size={24} />
           </div>
           <div className="flex-1">
@@ -66,9 +66,9 @@ export function ReachPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
-          <div className="liquid-glass rounded-full p-4">
+          <div className="frosted-glass rounded-full p-4">
             <Mail size={24} />
           </div>
           <div className="flex-1">
@@ -95,9 +95,9 @@ export function ReachPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="group liquid-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
+          className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
-          <div className="liquid-glass rounded-full p-4">
+          <div className="frosted-glass rounded-full p-4">
             <ExternalLink size={24} />
           </div>
           <div className="flex-1">
@@ -121,9 +121,9 @@ export function ReachPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="liquid-glass rounded-2xl p-8 flex items-center gap-5"
+          className="frosted-glass rounded-2xl p-8 flex items-center gap-5"
         >
-          <div className="liquid-glass rounded-full p-4">
+          <div className="frosted-glass rounded-full p-4">
             <svg
               width="24"
               height="24"

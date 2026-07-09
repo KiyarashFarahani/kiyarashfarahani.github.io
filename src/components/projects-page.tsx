@@ -73,7 +73,7 @@ export function ProjectsPage() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="liquid-glass rounded-2xl h-72 animate-pulse" />
+            <div key={i} className="frosted-glass rounded-2xl h-72 animate-pulse" />
           ))}
         </div>
       ) : (
@@ -87,7 +87,7 @@ export function ProjectsPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group liquid-glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex flex-col"
+              className="group frosted-glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-muted">
                 <img
@@ -101,7 +101,7 @@ export function ProjectsPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 {repo.homepage && (
-                  <div className="absolute top-3 right-3 liquid-glass rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-3 right-3 frosted-glass rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <ExternalLink size={14} />
                   </div>
                 )}

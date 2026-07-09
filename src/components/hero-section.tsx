@@ -21,7 +21,7 @@ export function HeroSection() {
 
       <button
         onClick={() => navigate("projects")}
-        className="liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] transition-transform cursor-pointer animate-fade-rise-delay-2"
+        className="frosted-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] transition-transform cursor-pointer animate-fade-rise-delay-2"
       >
         View Projects
       </button>
