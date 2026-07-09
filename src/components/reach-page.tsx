@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, ExternalLink } from "lucide-react";
+import { Mail, ExternalLink, MessageCircle } from "lucide-react";
 
 function GithubIcon({ size = 24 }: { size?: number }) {
   return (
@@ -89,7 +89,7 @@ export function ReachPage() {
         </motion.a>
 
         <motion.a
-          href="https://kiana-farahani.vercel.app"
+          href="https://www.linkedin.com/in/kiyarash-farahani"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 24 }}
@@ -98,17 +98,24 @@ export function ReachPage() {
           className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
           <div className="frosted-glass rounded-full p-4">
-            <ExternalLink size={24} />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
           </div>
           <div className="flex-1">
             <h3
               className="text-xl mb-1"
               style={{ fontFamily: "'Instrument Serif', serif" }}
             >
-              Artist Portfolio
+              LinkedIn
             </h3>
             <p className="text-muted-foreground text-sm">
-              kiana-farahani.vercel.app
+              Kiyarash Farahani
             </p>
           </div>
           <ExternalLink
@@ -117,38 +124,34 @@ export function ReachPage() {
           />
         </motion.a>
 
-        <motion.div
+        <motion.a
+          href="https://t.me/KiyarashNF"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="frosted-glass rounded-2xl p-8 flex items-center gap-5"
+          className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5"
         >
           <div className="frosted-glass rounded-full p-4">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
+            <MessageCircle size={24} />
           </div>
           <div className="flex-1">
             <h3
               className="text-xl mb-1"
               style={{ fontFamily: "'Instrument Serif', serif" }}
             >
-              Let&apos;s Talk
+              Telegram
             </h3>
             <p className="text-muted-foreground text-sm">
-              Open to collaborations and new opportunities
+              @KiyarashNF
             </p>
           </div>
-        </motion.div>
+          <ExternalLink
+            size={16}
+            className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+          />
+        </motion.a>
       </div>
     </section>
   );
