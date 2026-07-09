@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     "Developer from Iran, Making Mobile Applications and Websites",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -40,7 +40,8 @@ export default function Home() {
   return (
     <PageProvider>
       <div className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 h-screen z-0">
+        {/* Background extends behind status bar */}
+        <div className="fixed inset-0 z-0">
           <Aurora colorStops={["#051ba3", "#678cff", "#5227FF"]} amplitude={0.8} blend={0.3} />
         </div>
         <Navigation />

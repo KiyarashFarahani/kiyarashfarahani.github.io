@@ -27,6 +27,7 @@ export function Navigation() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4 pointer-events-none"
+      style={{ paddingTop: "calc(1.25rem + env(safe-area-inset-top))" }}
     >
       <nav
         className={`pointer-events-auto flex items-center gap-1 sm:gap-2 rounded-full px-2 sm:px-3 py-2 transition-all duration-300 ${

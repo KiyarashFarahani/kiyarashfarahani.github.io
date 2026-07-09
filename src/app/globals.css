@@ -50,9 +50,23 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* Full bleed background for mobile status bar */
+@layer base {
+  html,
+  body {
+    /* Extend to cover safe areas on mobile devices */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 }
 
