@@ -37,8 +37,8 @@ export function AboutPage() {
               and smart contract development (Solidity). I&apos;m driven by
               curiosity and a desire to ship things that people actually use.
             </p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
