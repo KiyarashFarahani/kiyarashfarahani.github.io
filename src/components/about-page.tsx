@@ -38,7 +38,6 @@ export function AboutPage() {
               curiosity and a desire to ship things that people actually use.
             </p>
           </motion.div>
-        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
