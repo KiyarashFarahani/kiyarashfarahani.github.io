@@ -79,7 +79,7 @@ export function ReachPage() {
               Email
             </h3>
             <p className="text-muted-foreground text-sm">
-              kiyarash.farahani@gmail.com
+              farahanikiyarash@gmail.com
             </p>
           </div>
           <ExternalLink
