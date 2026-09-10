@@ -1,19 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Globe, ChevronDown, Check } from "lucide-react";
 import { usePage, type Page } from "@/lib/page-context";
 import { useLocale } from "@/lib/locale-context";
+import { LANGUAGES } from "@/lib/locale-context";
 
 export function Navigation() {
   const { page, navigate } = usePage();
-  const { locale, dict, toggle } = useLocale();
+  const { locale, dict, setLocale } = useLocale();
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const current = LANGUAGES.find((l) => l.code === locale) ?? LANGUAGES[0];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const links: { label: string; page: Page }[] = [
@@ -57,13 +77,56 @@ export function Navigation() {
           </button>
         ))}
         <div className="w-px h-5 bg-white/15 mx-1" />
-        <button
-          onClick={toggle}
-          aria-label={locale === "en" ? "Switch to Persian" : "تغییر به انگلیسی"}
-          className="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
-        >
-          {locale === "en" ? "فا" : "EN"}
-        </button>
+        <div ref={menuRef} className="relative">
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-haspopup="menu"
+            aria-expanded={open}
+            aria-label="Choose language"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+          >
+            <Globe size={13} className="opacity-80" />
+            <span>{current.short}</span>
+            <ChevronDown size={12} className={`opacity-60 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                role="menu"
+                className="absolute top-full mt-2 right-0 min-w-[180px] rounded-2xl bg-black/75 backdrop-blur-xl border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.45)] overflow-hidden p-1.5"
+              >
+                {LANGUAGES.map((lang) => {
+                  const active = locale === lang.code;
+                  return (
+                    <button
+                      key={lang.code}
+                      role="menuitem"
+                      onClick={() => {
+                        setLocale(lang.code);
+                        setOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors cursor-pointer ${
+                        active ? "bg-white/15 text-white" : "text-white/70 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <span className={`text-xs font-bold w-7 text-center rounded-md py-0.5 ${active ? "bg-white text-black" : "bg-white/10 text-white/80"}`}>
+                          {lang.short}
+                        </span>
+                        <span className="font-medium">{lang.native}</span>
+                      </span>
+                      {active && <Check size={14} className="text-white shrink-0" />}
+                    </button>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </nav>
     </motion.header>
   );
