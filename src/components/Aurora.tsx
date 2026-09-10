@@ -126,6 +126,9 @@ export default function Aurora(props: AuroraProps) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
@@ -155,7 +158,7 @@ export default function Aurora(props: AuroraProps) {
       delete geometry.attributes.uv;
     }
 
-    const colorStopsArray = colorStops.map(hex => {
+    const colorStopsArray = colorStops.map((hex) => {
       const c = new Color(hex);
       return [c.r, c.g, c.b];
     });
@@ -176,8 +179,16 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
+    const targetFps = reduceMotion ? 24 : isMobile ? 30 : 45;
+    const frameInterval = 1000 / targetFps;
+    let lastFrame = performance.now();
+
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
+      if (document.hidden) return;
+      const now = performance.now();
+      if (now - lastFrame < frameInterval) return;
+      lastFrame = now - ((now - lastFrame) % frameInterval);
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       if (program) {
         program.uniforms.uTime.value = time * speed * 0.1;

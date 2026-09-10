@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Mail, ExternalLink, MessageCircle } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import BlurText from "./BlurText";
@@ -15,12 +16,18 @@ function GithubIcon({ size = 24 }: { size?: number }) {
 
 export function ReachPage() {
   const { dict, locale } = useLocale();
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    queueMicrotask(() => setPhase(0));
+  }, [locale]);
+
   return (
     <section className="relative z-10 min-h-screen px-6 pt-32 pb-20 max-w-4xl mx-auto">
-      <BlurText key={`${locale}-reach-title`} text={dict.reach.title} delay={90} animateBy="words" direction="top" className={`blur-heading text-5xl sm:text-7xl md:text-8xl ${locale === "fa" ? "mb-8 sm:mb-10" : "mb-4"}`} />
-      <BlurText key={`${locale}-reach-sub`} text={dict.reach.subtitle} delay={30} animateBy="words" direction="top" className="text-muted-foreground text-lg max-w-2xl mb-14" />
+      <BlurText key={`${locale}-reach-title`} text={dict.reach.title} delay={90} animateBy="words" direction="top" active={phase >= 0} onAnimationComplete={() => setPhase((p) => (p === 0 ? 1 : p))} className={`blur-heading text-5xl sm:text-7xl md:text-8xl ${locale === "fa" ? "mb-8 sm:mb-10" : "mb-4"}`} />
+      <BlurText key={`${locale}-reach-sub`} text={dict.reach.subtitle} delay={30} animateBy="words" direction="top" active={phase >= 1} onAnimationComplete={() => setPhase((p) => (p === 1 ? 2 : p))} className="text-muted-foreground text-lg max-w-2xl mb-14" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <motion.a dir="ltr" href="https://github.com/KiyarashFarahani" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
+        <motion.a dir="ltr" href="https://github.com/KiyarashFarahani" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={phase >= 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} transition={{ duration: 0.45, delay: phase >= 2 ? 0 * 0.08 : 0, ease: "easeOut" }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
           <div className="frosted-glass rounded-full p-4"><GithubIcon size={24} /></div>
           <div className="flex-1 min-w-0">
             <BlurText text="GitHub" delay={60} animateBy="words" direction="top" className="blur-heading text-xl mb-1" threshold={0.1} stepDuration={0.3} />
@@ -28,7 +35,7 @@ export function ReachPage() {
           </div>
           <ExternalLink size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
         </motion.a>
-        <motion.a dir="ltr" href="mailto:farahanikiyarash@gmail.com" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
+        <motion.a dir="ltr" href="mailto:farahanikiyarash@gmail.com" initial={{ opacity: 0, y: 24 }} animate={phase >= 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} transition={{ duration: 0.45, delay: phase >= 2 ? 1 * 0.08 : 0, ease: "easeOut" }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
           <div className="frosted-glass rounded-full p-4"><Mail size={24} /></div>
           <div className="flex-1 min-w-0">
             <BlurText text="Email" delay={60} animateBy="words" direction="top" className="blur-heading text-xl mb-1" threshold={0.1} stepDuration={0.3} />
@@ -36,7 +43,7 @@ export function ReachPage() {
           </div>
           <ExternalLink size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
         </motion.a>
-        <motion.a dir="ltr" href="https://www.linkedin.com/in/kiyarash-farahani" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
+        <motion.a dir="ltr" href="https://www.linkedin.com/in/kiyarash-farahani" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={phase >= 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} transition={{ duration: 0.45, delay: phase >= 2 ? 2 * 0.08 : 0, ease: "easeOut" }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
           <div className="frosted-glass rounded-full p-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg></div>
           <div className="flex-1 min-w-0">
             <BlurText text="LinkedIn" delay={60} animateBy="words" direction="top" className="blur-heading text-xl mb-1" threshold={0.1} stepDuration={0.3} />
@@ -44,7 +51,7 @@ export function ReachPage() {
           </div>
           <ExternalLink size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
         </motion.a>
-        <motion.a dir="ltr" href="https://t.me/KiyarashNF" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
+        <motion.a dir="ltr" href="https://t.me/KiyarashNF" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 24 }} animate={phase >= 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} transition={{ duration: 0.45, delay: phase >= 2 ? 3 * 0.08 : 0, ease: "easeOut" }} className="group frosted-glass rounded-2xl p-8 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-5">
           <div className="frosted-glass rounded-full p-4"><MessageCircle size={24} /></div>
           <div className="flex-1 min-w-0">
             <BlurText text="Telegram" delay={60} animateBy="words" direction="top" className="blur-heading text-xl mb-1" threshold={0.1} stepDuration={0.3} />

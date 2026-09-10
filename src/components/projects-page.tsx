@@ -28,6 +28,11 @@ export function ProjectsPage() {
   const { dict, locale } = useLocale();
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    queueMicrotask(() => setPhase(0));
+  }, [locale]);
 
   useEffect(() => {
     fetch("https://api.github.com/users/KiyarashFarahani/repos?per_page=100&sort=updated", { cache: "force-cache" })
@@ -43,8 +48,8 @@ export function ProjectsPage() {
 
   return (
     <section className="relative z-10 min-h-screen px-6 pt-32 pb-20 max-w-7xl mx-auto">
-      <BlurText key={`${locale}-proj-title`} text={dict.projects.title} delay={90} animateBy="words" direction="top" className={`blur-heading text-5xl sm:text-7xl md:text-8xl ${locale === "fa" ? "mb-8 sm:mb-10" : "mb-4"}`} />
-      <BlurText key={`${locale}-proj-sub`} text={dict.projects.subtitle} delay={30} animateBy="words" direction="top" className="text-muted-foreground text-lg max-w-2xl mb-14" />
+      <BlurText key={`${locale}-proj-title`} text={dict.projects.title} delay={90} animateBy="words" direction="top" active={phase >= 0} onAnimationComplete={() => setPhase((p) => (p === 0 ? 1 : p))} className={`blur-heading text-5xl sm:text-7xl md:text-8xl ${locale === "fa" ? "mb-8 sm:mb-10" : "mb-4"}`} />
+      <BlurText key={`${locale}-proj-sub`} text={dict.projects.subtitle} delay={30} animateBy="words" direction="top" active={phase >= 1} onAnimationComplete={() => setPhase((p) => (p === 1 ? 2 : p))} className="text-muted-foreground text-lg max-w-2xl mb-14" />
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,8 +66,8 @@ export function ProjectsPage() {
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
+              animate={phase >= 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.45, delay: phase >= 2 ? i * 0.06 : 0, ease: "easeOut" }}
               className="group frosted-glass rounded-2xl overflow-hidden flex flex-col"
             >
               <div className="relative h-44 overflow-hidden bg-muted">

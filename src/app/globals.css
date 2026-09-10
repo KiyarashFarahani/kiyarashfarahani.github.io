@@ -120,6 +120,20 @@
   }
 }
 
+.about-pill,
+.about-card {
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.20);
+}
+
+@media (max-width: 768px) {
+  .about-pill,
+  .about-card {
+    background: rgba(255, 255, 255, 0.13);
+  }
+}
+
 /* GPU Compositor Layers — compositor promotion without clipping */
 .blur-text {
   overflow: visible;

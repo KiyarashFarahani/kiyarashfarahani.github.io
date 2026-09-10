@@ -16,6 +16,7 @@ type BlurTextProps = {
   easing?: Easing | Easing[];
   onAnimationComplete?: () => void;
   stepDuration?: number;
+  active?: boolean;
 };
 
 const buildKeyframes = (
@@ -43,12 +44,14 @@ const BlurText: React.FC<BlurTextProps> = ({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.35,
+  active = true,
 }) => {
   const elements = animateBy === "words" ? text.split(" ") : text.split("");
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
+    if (!active) return;
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -62,7 +65,7 @@ const BlurText: React.FC<BlurTextProps> = ({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, active]);
 
   const defaultFrom = useMemo(
     () => (direction === "top" ? { filter: "blur(10px)", opacity: 0, y: -50 } : { filter: "blur(10px)", opacity: 0, y: 50 }),
@@ -97,10 +100,10 @@ const BlurText: React.FC<BlurTextProps> = ({
           <motion.span
             key={index}
             initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
+            animate={active && inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
-            style={{ display: "inline-block", willChange: "transform, filter, opacity" }}
+            style={{ display: "inline-block", willChange: active && inView ? "transform, filter, opacity" : "auto" }}
           >
             {segment === " " ? "\u00A0" : segment}
             {animateBy === "words" && index < elements.length - 1 && "\u00A0"}
