@@ -120,37 +120,58 @@
   }
 }
 
-/* Animations */
+/* GPU Compositor Layers — compositor promotion without clipping */
+.blur-text {
+  overflow: visible;
+  padding-block: 0.14em;
+}
+.blur-text span {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.frosted-glass {
+  transform: translateZ(0);
+}
+
+/* Animations — compositor only (transform/opacity) */
 @keyframes fade-rise {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(0, 24px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-fade-rise {
   animation: fade-rise 0.8s ease-out both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .animate-fade-rise-delay {
   animation: fade-rise 0.8s ease-out 0.2s both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-rise-delay-2 {
   animation: fade-rise 0.8s ease-out 0.4s both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
-/* Shimmer Sweep */
+/* Shimmer Sweep — compositor only */
 @keyframes shimmer {
   0% {
-    transform: translateX(-100%) skewX(-15deg);
+    transform: translate3d(-100%, 0, 0) skewX(-15deg);
   }
   100% {
-    transform: translateX(200%) skewX(-15deg);
+    transform: translate3d(200%, 0, 0) skewX(-15deg);
   }
 }
 
@@ -165,10 +186,41 @@
     rgba(255, 255, 255, 0.08) 55%,
     transparent 100%
   );
-  transform: translateX(-100%) skewX(-15deg);
+  transform: translate3d(-100%, 0, 0) skewX(-15deg);
   pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .group:hover .shimmer-overlay {
   animation: shimmer 0.8s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .blur-text span {
+    filter: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .shimmer-overlay {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .frosted-glass {
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+  }
+  .shimmer-overlay {
+    display: none;
+  }
 }
