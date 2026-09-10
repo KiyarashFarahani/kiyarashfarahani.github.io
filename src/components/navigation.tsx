@@ -48,11 +48,11 @@ export function Navigation() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4 pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-1 sm:px-4 pointer-events-none"
       style={{ paddingTop: "calc(1.25rem + env(safe-area-inset-top))" }}
     >
       <nav
-        className={`pointer-events-auto flex items-center gap-1 sm:gap-2 rounded-full px-2 sm:px-3 py-2 transition-all duration-300 ${
+        className={`pointer-events-auto flex items-center justify-center gap-[clamp(1px,0.3vw,8px)] sm:gap-2 rounded-full px-1 sm:px-3 py-1.5 sm:py-2 max-w-full min-w-0 transition-all duration-300 ${
           scrolled
             ? "bg-black/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
             : "bg-black/40 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.2)]"
@@ -62,7 +62,7 @@ export function Navigation() {
           <button
             key={link.page}
             onClick={() => navigate(link.page)}
-            className={`relative px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 whitespace-nowrap cursor-pointer ${
+            className={`relative px-[clamp(6px,1.6vw,16px)] sm:px-4 py-2 rounded-full text-[clamp(10px,2.7vw,14px)] sm:text-sm font-medium transition-colors duration-200 whitespace-nowrap cursor-pointer ${
               page === link.page ? "text-white" : "text-white/60 hover:text-white/90"
             }`}
           >
@@ -76,14 +76,14 @@ export function Navigation() {
             <span className="relative z-10">{link.label}</span>
           </button>
         ))}
-        <div className="w-px h-5 bg-white/15 mx-1" />
+        <div className="w-px h-5 bg-white/15 mx-0.5 sm:mx-1 shrink-0" />
         <div ref={menuRef} className="relative">
           <button
             onClick={() => setOpen((v) => !v)}
             aria-haspopup="menu"
             aria-expanded={open}
             aria-label="Choose language"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer shrink-0"
           >
             <Globe size={13} className="opacity-80" />
             <span>{current.short}</span>
