@@ -3,16 +3,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { usePage, type Page } from "@/lib/page-context";
-
-const links: { label: string; page: Page }[] = [
-  { label: "Home", page: "home" },
-  { label: "Projects", page: "projects" },
-  { label: "About Me", page: "about" },
-  { label: "Reach Me", page: "reach" },
-];
+import { useLocale } from "@/lib/locale-context";
 
 export function Navigation() {
   const { page, navigate } = usePage();
+  const { locale, dict, toggle } = useLocale();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -20,6 +15,13 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const links: { label: string; page: Page }[] = [
+    { label: dict.nav.home, page: "home" },
+    { label: dict.nav.projects, page: "projects" },
+    { label: dict.nav.about, page: "about" },
+    { label: dict.nav.reach, page: "reach" },
+  ];
 
   return (
     <motion.header
@@ -41,9 +43,7 @@ export function Navigation() {
             key={link.page}
             onClick={() => navigate(link.page)}
             className={`relative px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 whitespace-nowrap cursor-pointer ${
-              page === link.page
-                ? "text-white"
-                : "text-white/60 hover:text-white/90"
+              page === link.page ? "text-white" : "text-white/60 hover:text-white/90"
             }`}
           >
             {page === link.page && (
@@ -56,6 +56,14 @@ export function Navigation() {
             <span className="relative z-10">{link.label}</span>
           </button>
         ))}
+        <div className="w-px h-5 bg-white/15 mx-1" />
+        <button
+          onClick={toggle}
+          aria-label={locale === "en" ? "Switch to Persian" : "تغییر به انگلیسی"}
+          className="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+        >
+          {locale === "en" ? "فا" : "EN"}
+        </button>
       </nav>
     </motion.header>
   );

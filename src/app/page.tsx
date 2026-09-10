@@ -24,6 +24,7 @@ function PageContent() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
+        className={page === "home" ? "flex flex-1 flex-col" : undefined}
       >
         <Suspense fallback={null}>
           {page === "home" && <HeroSection />}
@@ -39,7 +40,7 @@ function PageContent() {
 export default function Home() {
   return (
     <PageProvider>
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative flex min-h-[100dvh] flex-col overflow-hidden">
         {/* Background extends behind status bar */}
         <div className="fixed inset-0 z-0">
           <Aurora colorStops={["#051ba3", "#678cff", "#5227FF"]} amplitude={0.8} blend={0.3} />
