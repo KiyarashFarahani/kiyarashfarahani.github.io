@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { LocaleProvider } from "@/lib/locale-context";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -16,6 +18,22 @@ const inter = Inter({
   weight: ["400", "500"],
   display: "swap",
 });
+
+const vazirmatn = localFont({
+  src: "../../public/fonts/Vazirmatn/Vazirmatn.ttf",
+  variable: "--font-fa",
+  display: "swap",
+  weight: "100 900",
+});
+
+const picopic = localFont({
+  src: "../../public/fonts/Picopic/Picopic-Variable.ttf",
+  variable: "--font-fa-display",
+  display: "swap",
+  weight: "100 900",
+});
+
+const localeScript = `(function(){try{var s;try{s=localStorage.getItem('velorah-locale')}catch(e){}var c=document.cookie.match(/(?:^|; )velorah-locale=(en|fa)/);var l=c?c[1]:s;if(l!=='fa'&&l!=='en'){try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;l=tz==='Asia/Tehran'?'fa':'en'}catch(e){l='en'}}document.documentElement.lang=l;document.documentElement.dir=l==='fa'?'rtl':'ltr'}catch(e){}})();`;
 
 export const metadata: Metadata = {
   title: "Kiyarash Farahani",
@@ -37,9 +55,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${instrumentSerif.variable} ${inter.variable} ${vazirmatn.variable} ${picopic.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: localeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <LocaleProvider>{children}</LocaleProvider>
+      </body>
     </html>
   );
 }

@@ -50,11 +50,34 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
-    /* Prevent overscroll bounce on iOS */
     overscroll-behavior: none;
   }
   html {
     @apply font-sans;
+  }
+  html[dir="rtl"] body {
+    font-family: var(--font-fa);
+  }
+  .blur-heading {
+    font-family: var(--font-display);
+  }
+  html[dir="rtl"] .blur-heading,
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3 {
+    font-family: var(--font-fa-display) !important;
+  }
+  html[dir="rtl"] [dir="ltr"] {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: var(--font-body);
+  }
+  html[dir="rtl"] [dir="ltr"].blur-heading,
+  html[dir="rtl"] [dir="ltr"] .blur-heading,
+  html[dir="rtl"] [dir="ltr"] h1,
+  html[dir="rtl"] [dir="ltr"] h2,
+  html[dir="rtl"] [dir="ltr"] h3 {
+    font-family: var(--font-display) !important;
   }
 }
 
