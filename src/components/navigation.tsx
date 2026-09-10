@@ -97,7 +97,7 @@ export function Navigation() {
                 exit={{ opacity: 0, y: -6, scale: 0.98 }}
                 transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                 role="menu"
-                className="absolute top-full mt-2 right-0 min-w-[180px] rounded-2xl bg-black/75 backdrop-blur-xl border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.45)] overflow-hidden p-1.5"
+                className={`absolute top-full mt-2 min-w-[180px] rounded-2xl bg-black/75 backdrop-blur-xl border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.45)] overflow-hidden p-1.5 ${locale === "fa" ? "left-0 right-auto" : "right-0"}`}
               >
                 {LANGUAGES.map((lang) => {
                   const active = locale === lang.code;
