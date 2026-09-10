@@ -5,6 +5,12 @@ import { dictionaries, type Locale, type Dictionary } from "./dictionaries";
 
 const STORAGE_KEY = "velorah-locale";
 
+export const LANGUAGES: { code: Locale; short: string; native: string }[] = [
+  { code: "en", short: "EN", native: "English" },
+  { code: "fa", short: "فا", native: "فارسی" },
+  { code: "ja", short: "JA", native: "日本語" },
+];
+
 function detectLocale(): Locale {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -35,7 +41,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (stored === "fa" || stored === "en") {
+    if (stored === "en" || stored === "fa" || stored === "ja") {
       setLocaleState(stored);
     } else {
       setLocaleState(detectLocale());

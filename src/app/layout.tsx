@@ -33,7 +33,21 @@ const picopic = localFont({
   weight: "100 900",
 });
 
-const localeScript = `(function(){try{var s;try{s=localStorage.getItem('velorah-locale')}catch(e){}var c=document.cookie.match(/(?:^|; )velorah-locale=(en|fa)/);var l=c?c[1]:s;if(l!=='fa'&&l!=='en'){try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;l=tz==='Asia/Tehran'?'fa':'en'}catch(e){l='en'}}document.documentElement.lang=l;document.documentElement.dir=l==='fa'?'rtl':'ltr'}catch(e){}})();`;
+const notoSansJP = localFont({
+  src: "../../public/fonts/NotoSansJP/NotoSansJP-Variable.ttf",
+  variable: "--font-ja",
+  display: "swap",
+  weight: "100 900",
+});
+
+const delaGothicOne = localFont({
+  src: "../../public/fonts/DelaGothicOne/DelaGothicOne-Regular.ttf",
+  variable: "--font-ja-display",
+  display: "swap",
+  weight: "400",
+});
+
+const localeScript = `(function(){try{var s;try{s=localStorage.getItem('velorah-locale')}catch(e){}var c=document.cookie.match(/(?:^|; )velorah-locale=(en|fa|ja)/);var l=c?c[1]:s;if(l!=='ja'&&l!=='fa'&&l!=='en'){try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;l=tz==='Asia/Tehran'?'fa':'en'}catch(e){l='en'}}document.documentElement.lang=l;document.documentElement.dir=l==='fa'?'rtl':'ltr'}catch(e){}})();`;
 
 export const metadata: Metadata = {
   title: "Kiyarash Farahani",
@@ -56,7 +70,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${instrumentSerif.variable} ${inter.variable} ${vazirmatn.variable} ${picopic.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${inter.variable} ${notoSansJP.variable} ${vazirmatn.variable} ${picopic.variable} ${delaGothicOne.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: localeScript }} />

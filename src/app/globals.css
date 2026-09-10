@@ -41,6 +41,7 @@
   --radius: 0.625rem;
   --font-display: "Instrument Serif", serif;
   --font-body: "Inter", sans-serif;
+  --font-ja: "Noto Sans JP", sans-serif;
 }
 
 @layer base {
@@ -58,6 +59,9 @@
   html[dir="rtl"] body {
     font-family: var(--font-fa);
   }
+  html[lang="ja"] body {
+    font-family: var(--font-ja);
+  }
   .blur-heading {
     font-family: var(--font-display);
   }
@@ -66,6 +70,12 @@
   html[dir="rtl"] h2,
   html[dir="rtl"] h3 {
     font-family: var(--font-fa-display) !important;
+  }
+  html[lang="ja"] .blur-heading,
+  html[lang="ja"] h1,
+  html[lang="ja"] h2,
+  html[lang="ja"] h3 {
+    font-family: var(--font-ja-display) !important;
   }
   html[dir="rtl"] [dir="ltr"] {
     direction: ltr;

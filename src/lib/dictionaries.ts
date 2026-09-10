@@ -1,4 +1,4 @@
-export type Locale = "en" | "fa";
+export type Locale = "en" | "fa" | "ja";
 
 export const dictionaries = {
   en: {
@@ -23,8 +23,8 @@ export const dictionaries = {
     },
     about: {
       title: "About Me",
-      p1: "I'm a developer from Iran with a passion for building clean, performant applications across platforms. From native Android apps to cross-platform Flutter projects and modern web experiences, I enjoy working across the full stack.",
-      p2: "My work spans mobile development (Kotlin, Flutter), systems programming (C++), web technologies (TypeScript, React, Next.js), and smart contract development (Solidity). I'm driven by curiosity and a desire to ship things that people actually use.",
+      p1: "I'm a developer with a passion for building clean, performant applications across platforms. I have experience with native Android apps, cross-platform projects and modern webites, I enjoy working across the full stack.",
+      p2: "My work spans mobile development (Kotlin, Flutter), systems programming (C++) and web technologies (TypeScript, React, Next.js).",
       technologies: "Technologies",
       focusAreas: "Focus Areas",
       areas: [
@@ -49,20 +49,20 @@ export const dictionaries = {
     hero: {
       firstName: "کیارش",
       lastName: "فراهانی",
-      subtitle: "توسعه‌دهنده وب و اپلیکیشن موبایل",
-      cta: "مشاهده پروژه‌ها",
+      subtitle: "توسعه‌دهنده وب‌سایت و اپلیکیشن موبایل",
+      cta: "پروژه‌ها",
       ctaContact: "تماس با من",
     },
     projects: {
       title: "پروژه‌ها",
-      subtitle: "مجموعه‌ای از پروژه‌هایی که در حوزه‌های موبایل، وب و برنامه‌نویسی سیستمی ساخته‌ام.",
+      subtitle: "چند نمونه از پروژه‌هایی در حوزه‌های مختلف شامل اپلیکیشن موبایل، وب‌سایت و موارد دیگر",
       noDescription: "توضیحی ثبت نشده است.",
       archived: "آرشیو شده",
     },
     about: {
       title: "درباره من",
-      p1: "توسعه‌دهنده‌ای از ایران هستم با علاقه به ساخت اپلیکیشن‌های تمیز و پرسرعت در پلتفرم‌های مختلف. از اپ‌های نیتیو اندروید تا پروژه‌های چندسکویی با فلاتر و تجربه‌های مدرن وب، از کار روی تمام بخش‌های محصول لذت می‌برم.",
-      p2: "حوزه کاری من شامل توسعه موبایل (کاتلین، فلاتر)، برنامه‌نویسی سیستمی (C++)، تکنولوژی‌های وب (تایپ‌اسکریپت، ری‌اکت، نکست‌جی‌اس) و توسعه قرارداد هوشمند (سالیدیتی) است. کنجکاوی و اشتیاق به ساخت محصولاتی که واقعاً استفاده می‌شوند، انگیزه اصلی من است.",
+      p1: "توسعه‌دهنده‌ای هستم با اشتیاق به ساخت اپلیکیشن‌های تمیز و پرسرعت در پلتفرم‌های مختلف. تجربه ساخت اپلیکیشن‌های اندروید، پروژه‌های چندسکویی و وب‌سایت‌های مدرن را دارم و از کار در تمام بخش‌های محصول لذت می‌برم.",
+      p2: "حوزه کاری من توسعه موبایل (Kotlin, Flutter)، برنامه‌نویسی سیستمی (C++) و تکنولوژی‌های وب (TypeScript, React, Next.js) را در بر می‌گیرد.",
       technologies: "تکنولوژی‌ها",
       focusAreas: "حوزه‌های تمرکز",
       areas: [
@@ -75,6 +75,44 @@ export const dictionaries = {
     reach: {
       title: "تماس با من",
       subtitle: "ایده‌ای در ذهن داری یا فقط می‌خوای سلام کنی؟ خوشحال می‌شم ازت بشنوم.",
+    },
+  },
+  ja: {
+    nav: {
+      home: "ホーム",
+      projects: "プロジェクト",
+      about: "私について",
+      reach: "コンタクト",
+    },
+    hero: {
+      firstName: "キヤラシュ",
+      lastName: "ファラハニ",
+      subtitle: "ウェブサイト・モバイルアプリ開発者",
+      cta: "プロジェクトを見る",
+      ctaContact: "気軽に連絡する",
+    },
+    projects: {
+      title: "プロジェクト",
+      subtitle: "モバイル、ウェブ、システム開発で作ってきたプロジェクトをいくつか紹介します。",
+      noDescription: "説明がありません。",
+      archived: "アーカイブ済み",
+    },
+    about: {
+      title: "私について",
+      p1: "プラットフォームを問わず、クリーンで高速なアプリを作るのが好きな開発者です。ネイティブAndroid、クロスプラットフォーム、モダンなウェブサイトまで、フルスタックで作ることを楽しんでいます。",
+      p2: "普段はモバイル開発（Kotlin / Flutter）、システムプログラミング（C++）、ウェブ技術（TypeScript / React / Next.js）を中心に開発しています。",
+      technologies: "技術スタック",
+      focusAreas: "得意分野",
+      areas: [
+        "モバイルアプリ開発",
+        "フルスタックWebアプリケーション",
+        "クロスプラットフォーム開発",
+        "UI/UXデザイン",
+      ],
+    },
+    reach: {
+      title: "コンタクト",
+      subtitle: "プロジェクトの相談でも、ちょっと挨拶したいだけでも、気軽に声をかけてください。",
     },
   },
 } as const;
