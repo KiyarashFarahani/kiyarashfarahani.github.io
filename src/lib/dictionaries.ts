@@ -82,7 +82,7 @@ export const dictionaries = {
       home: "ホーム",
       projects: "プロジェクト",
       about: "私について",
-      reach: "コンタクト",
+      reach: "お問い合わせ",
     },
     hero: {
       firstName: "キヤラシュ",
@@ -105,13 +105,13 @@ export const dictionaries = {
       focusAreas: "得意分野",
       areas: [
         "モバイルアプリ開発",
-        "フルスタックWebアプリケーション",
+        "フルスタックウェブアプリケーション",
         "クロスプラットフォーム開発",
         "UI/UXデザイン",
       ],
     },
     reach: {
-      title: "コンタクト",
+      title: "お問い合わせ",
       subtitle: "プロジェクトの相談でも、ちょっと挨拶したいだけでも、気軽に声をかけてください。",
     },
   },
